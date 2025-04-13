@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="lofi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Formulaire de contact</title>
+  <link href="css/output.css" rel="stylesheet">
+  <style>
+    .particle {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background-color: #1e3a8a;
+    border-radius: 9999px;
+    opacity: 0.4;
+    filter: blur(40px);
+    animation: float 20s infinite ease-in-out;
+  }
+
+  .particle-1 {
+    top: 20%;
+    left: 10%;
+    animation-delay: 2s;
+  }
+
+  .particle-2 {
+    top: 40%;
+    left: 70%;
+    animation-delay: 5s;
+  }
+
+  .particle-3 {
+    top: 60%;
+    left: 30%;
+    animation-delay: 10s;
+  }
+
+  .particle-4 {
+    top: 80%;
+    left: 80%;
+    animation-delay: 2s;
+  }
+
+  .particle-5 {
+    top: 30%;
+    left: 50%;
+    animation-delay: 7s;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translate(0, 0) scale(1);
+    }
+    50% {
+      transform: translate(30px, -20px) scale(1.2);
+    }
+    
+  }
+  @keyframes fadeUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .fade-up {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 2s ease-out forwards;
+  }
+
+    </style>   
+</head>
+<body class="flex items-center justify-center min-h-screen bg-base-100 text-base-content">
+  <!-- Background Particles -->
+  <div class="background-animation fixed inset-0 z-0 overflow-hidden pointer-events-none">
+    <div class="particle top-1/4 left-1/3 animate-pulse"></div>
+    <div class="particle top-2/3 left-2/4 animate-ping"></div>
+    <div class="particle top-1/2 left-1/5 animate-pulse"></div>
+    <div class="particle top-[70%] left-[80%] animate-ping"></div>
+  </div>
+   <!-- Header Navigation -->
+   <header class="w-full fixed top-0 left-0 bg-neutral text-neutral-content p-4 shadow-md z-50">
+    <div class="container mx-auto flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <img src="static/logo.png" alt="Logo TechWorld" class="w-10 h-10 rounded-full" />
+        <h1 class="text-2xl font-bold">Jeux videos</h1>
+      </div>
+      <a href="index.html" class="btn btn-sm btn-accent">Accueil</a>
+    </div>
+  </header>  
+
+  <div class="card fade-up w-full max-w-xl shadow-xl bg-base-200 p-10">
+    <h2 class="text-2xl font-bold mb-6 text-center">Envoyer un message</h2>
+
+    <form id="contact-form" class="flex flex-col gap-4" onsubmit="return envoyerMail()">
+      <input type="text" id="nom" placeholder="Nom" class="input input-bordered w-full" required />
+      <input type="text" id="prenom" placeholder="Prénom" class="input input-bordered w-full" required />
+      <input type="email" id="email" placeholder="Email" class="input input-bordered w-full" required />
+      <textarea id="message" placeholder="Message" class="textarea textarea-bordered w-full" rows="5" required></textarea>
+      <button type="submit" class="btn btn-primary w-full">Envoyer</button>
+    </form>
+  </div>
+
+  <script>
+    function envoyerMail() {
+      const nom = document.getElementById('nom').value;
+      const prenom = document.getElementById('prenom').value;
+      const email = document.getElementById('email').value;
+      const message = document.getElementById('message').value;
+
+      const sujet = `Message de ${prenom} ${nom}`;
+      const body = `Nom : ${nom}%0D%0APrénom : ${prenom}%0D%0AEmail : ${email}%0D%0A%0D%0AMessage : %0D%0A${encodeURIComponent(message)}`;
+
+      window.location.href = `mailto:victor.aldebert@epita.fr?subject=${sujet}&body=${body}`;
+
+      return false; // empêche la soumission classique du formulaire
+    }
+  </script>
+</body>
+</html>
